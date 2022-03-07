@@ -5,7 +5,6 @@ packages:
   - python
   - jq
   - tmate
-  - linux-image-5.4.0-89-generic
 runcmd:
   - modprobe br_netfilter && echo '1' > /proc/sys/net/ipv4/ip_forward
   # Disable the annoying motd
@@ -13,19 +12,6 @@ runcmd:
   - chmod -x /etc/update-motd.d/80-livepatch
   - chmod -x /etc/update-motd.d/10-help-text
 
-system_info:
-  default_user:
-    name: ${DEFAULT_USER}
-ssh_authorized_keys:
-  - ${SSH_PUB_KEY}
-users:
-  - name: ${DEFAULT_USER}
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    groups: users, admin
-    shell: /bin/bash
-    lock_passwd: true
-    ssh_authorized_keys:
-      - ${SSH_PUB_KEY}
 write_files:
   - path: "/etc/vim/vimrc.local"
     permissions: "0744"
